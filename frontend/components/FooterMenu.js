@@ -1,40 +1,83 @@
 ﻿import { useNavigation, useRoute } from "@react-navigation/native";
-import { View, TouchableOpacity, Image, StyleSheet } from "react-native";
+import {
+  View,
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+  Animated,
+  Easing,
+  useEffect,
+} from "react-native";
+import React, { useRef } from "react";
 
 export default function FooterMenu() {
   const navigation = useNavigation();
   const route = useRoute();
 
+  // Animação de escala ao trocar de página
+  const scaleAnim = useRef(new Animated.Value(1)).current;
+
+  function animateIcon() {
+    scaleAnim.setValue(0.8); // Começa menor
+    Animated.timing(scaleAnim, {
+      toValue: 1,
+      duration: 200,
+      useNativeDriver: true,
+      easing: Easing.out(Easing.exp),
+    }).start();
+  }
+
   function goTo(screen) {
     if (route.name !== screen) {
+      animateIcon();
       navigation.navigate(screen);
     }
   }
 
+  const getIcon = (screen, icon, iconActive) => {
+    const isActive = route.name === screen;
+    const iconElement = (
+      <Animated.Image
+        source={isActive ? iconActive : icon}
+        style={[styles.icon, isActive && { transform: [{ scale: scaleAnim }] }]}
+      />
+    );
+
+    return isActive ? (
+      <View style={styles.centerIcon}>{iconElement}</View>
+    ) : (
+      iconElement
+    );
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.nav}>
+        {/* Botão Location */}
         <TouchableOpacity onPress={() => goTo("MapaSetores")}>
-          <Image
-            source={require("../../assets/location.png")}
-            style={[styles.icon, route.name === "MapaSetores" && styles.active]}
-          />
+          {getIcon(
+            "MapaSetores",
+            require("../../assets/location.png"),
+            require("../../assets/locationComplete.png")
+          )}
         </TouchableOpacity>
 
+        {/* Botão Home */}
         <TouchableOpacity onPress={() => goTo("inicioRH")}>
-          <View style={styles.centerIcon}>
-            <Image
-              source={require("../../assets/home.png")}
-              style={[styles.icon, route.name === "inicioRH" && styles.active]}
-            />
-          </View>
+          {getIcon(
+            "inicioRH",
+            require("../../assets/home.png"),
+            require("../../assets/homeComplete.png")
+          )}
         </TouchableOpacity>
 
+        {/* Botão Usuários */}
         <TouchableOpacity onPress={() => goTo("ListaFuncionarios")}>
-          <Image
-            source={require("../../assets/usuarios.png")}
-            style={[styles.icon, route.name === "ListaFuncionarios" && styles.active]}
-          />
+          {getIcon(
+            "ListaFuncionarios",
+            require("../../assets/usuarios.png"),
+            require("../../assets/usuariosComplete.png")
+          )}
         </TouchableOpacity>
       </View>
     </View>
@@ -49,12 +92,13 @@ const styles = StyleSheet.create({
     right: 0,
     alignItems: "center",
     zIndex: 1000,
+    marginBottom: 50,
   },
   nav: {
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    backgroundColor: "#6C63FF",
+    backgroundColor: "#6E6DFF",
     width: 220,
     height: 60,
     borderRadius: 30,
@@ -68,13 +112,10 @@ const styles = StyleSheet.create({
   icon: {
     width: 24,
     height: 24,
-    tintColor: "white",
-  },
-  active: {
-    tintColor: "#1a1a1a",
+    resizeMode: "contain",
   },
   centerIcon: {
-    backgroundColor: "#4e47d6",
+    backgroundColor: "#4746D8",
     padding: 12,
     borderRadius: 25,
   },

@@ -79,8 +79,8 @@ export default function Dashboard() {
               />
             </View>
             <View style={styles.greetingSection}>
-              <Text style={styles.greeting}>Olá, Jorge!</Text>
-              <Text style={styles.subGreeting}>Confira suas pendencias</Text>
+              <Text style={styles.greeting}>Bem vindo ao gerenciamento Augebit!</Text>
+              <Text style={styles.subGreeting}>Confira as pendencias</Text>
               <Text style={styles.subGreeting}>e acesse outras áreas por aqui</Text>
             </View>
           </View>
@@ -101,7 +101,7 @@ export default function Dashboard() {
               </View>
               <Image
                 source={require("../../assets/funcionarioImg.png")}
-                style={styles.funcionarioImg}
+                style={styles.cardImg}
                 resizeMode="contain"
               />
               <Text style={styles.cardLabel}>Funcionários</Text>
@@ -114,7 +114,7 @@ export default function Dashboard() {
               </View>
               <Image
                 source={require("../../assets/solicitacaoimg.png")}
-                style={styles.funcionarioImg}
+                style={styles.cardImg}
                 resizeMode="contain"
               />
               <Text style={styles.cardLabel}>Solicitações</Text>
@@ -129,7 +129,7 @@ export default function Dashboard() {
               </View>
               <Image
                 source={require("../../assets/pontosImg.png")}
-                style={styles.pontosImg}
+                style={styles.cardImg}
                 resizeMode="contain"
               />
               <Text style={styles.cardLabel}>Pontos</Text>
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   greeting: {
-    fontSize: 30,
+    fontSize: 20,
     fontWeight: "bold",
     color: "white",
     marginBottom: 4,
@@ -205,9 +205,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   logo: {
-    width: 100,
-    height: 100,
-    marginTop: -12,
+    width: 50,
+
   },
   logoFundo: {
     alignItems: "center",
@@ -299,6 +298,9 @@ const styles = StyleSheet.create({
     color: "#666",
     textAlign: "center",
   },
+  cardImg: {
+    height:
+  }
   cardBadge: {
     position: "absolute",
     top: 15,
