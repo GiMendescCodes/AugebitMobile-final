@@ -55,19 +55,19 @@ const CircularProgress = ({ percentage }) => {
 
 // Ícones como imagens
 const MailIcon = () => (
-  <Image source={require('../assets/images/gmail.png')} style={styles.iconText} resizeMode="contain" />
+  <Image source={require('../../assets/email.png')} style={styles.iconText} resizeMode="contain" />
 );
 
 const PhoneIcon = () => (
-  <Image source={require('../assets/images/tell.png')} style={styles.iconText} resizeMode="contain" />
+  <Image source={require('../../assets/phone.png')} style={styles.iconText} resizeMode="contain" />
 );
 
 const HomeIcon = () => (
-  <Image source={require('../assets/images/home.png')} style={styles.iconText} resizeMode="contain" />
+  <Image source={require('../../assets/casa.png')} style={styles.iconText} resizeMode="contain" />
 );
 
 const ShieldIcon = () => (
-  <Image source={require('../assets/images/money.png')} style={styles.iconText} resizeMode="contain" />
+  <Image source={require('../../assets/dinheiro.png')} style={styles.iconText} resizeMode="contain" />
 );
 
 const monthlyPerformance = [

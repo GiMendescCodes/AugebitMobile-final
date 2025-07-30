@@ -18,7 +18,7 @@ const LoginScreen = ({ navigation }) => {
     setLoading(true);
     try {
       // Envia POST JSON para o backend
-      const response = await fetch('http://192.168.1.73/augebiteMobile-final/backend/validas_login.php', {
+      const response = await fetch('http://192.168.1.73/AugebitMobile-final/backend/validas_login.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -27,17 +27,23 @@ const LoginScreen = ({ navigation }) => {
         }),
       });
 
-      const data = await response.json();
+      const text = await response.text();
+      console.log('Resposta bruta do backend:', text);
 
-      if (data.success) {
-        Alert.alert('Bem-vindo', data.message);
-        // navigation.navigate('Home'); // redirecione se quiser
+      if (text) {
+        const data = JSON.parse(text);
+        if (data.success) {
+          Alert.alert('Bem-vindo', data.message);
+          navigation.navigate('InicioFuncionario'); // Navega para a tela inicioFuncionario
+        } else {
+          Alert.alert('Erro', data.message);
+        }
       } else {
-        Alert.alert('Erro', data.message);
+        Alert.alert('Erro', 'Resposta vazia do servidor.');
       }
     } catch (error) {
       console.error('Erro de conexão:', error);
-      Alert.alert('Erro', 'Não foi possível conectar ao servidor.');
+      Alert.alert('Erro', 'Não foi possível conectar ao servidor ou resposta inválida.');
     } finally {
       setLoading(false);
     }

@@ -8,6 +8,8 @@ import inicioRH from './frontend/pages/InicioRH';
 import LoginFuncionario from './frontend/pages/Login';
 import MapaSetores from './frontend/pages/MapaSetores';
 import ListaFuncionarios from './frontend/pages/ListaFuncionarios';
+import InicioFuncionario from './frontend/pages/InicioFuncionario';
+import PerfilFuncionario from './frontend/pages/PerfilFuncionario';
 
 const Stack = createNativeStackNavigator();
 
@@ -68,6 +70,8 @@ export default function App() {
         <Stack.Screen name="LoginFuncionario" component={LoginFuncionario} />
         <Stack.Screen name="MapaSetores" component={MapaSetores} />
         <Stack.Screen name="ListaFuncionarios" component={ListaFuncionarios} />
+        <Stack.Screen name="InicioFuncionario" component={InicioFuncionario} />
+        <Stack.Screen name="PerfilFuncionario" component={PerfilFuncionario} />
       </Stack.Navigator>
     </NavigationContainer>
   );
