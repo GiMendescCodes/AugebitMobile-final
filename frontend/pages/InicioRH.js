@@ -299,8 +299,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   cardImg: {
-    height:
-  }
+    height: 30,
+    width: 30,
+  },
   cardBadge: {
     position: "absolute",
     top: 15,

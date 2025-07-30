@@ -106,8 +106,8 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   logo: {
-    width: 90,
-    height: 100,
+    width: 50,
+    height: 45,
     marginRight: 10
   },
   question: {

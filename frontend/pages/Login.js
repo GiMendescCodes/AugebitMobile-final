@@ -3,7 +3,6 @@ import {
   View, Text, TextInput, TouchableOpacity,
   StyleSheet, SafeAreaView, Image, Alert, ActivityIndicator,
 } from 'react-native';
-import axios from 'axios';
 
 const LoginScreen = ({ navigation }) => {
   const [nome, setNome] = useState('');
@@ -18,16 +17,23 @@ const LoginScreen = ({ navigation }) => {
 
     setLoading(true);
     try {
-      const response = await axios.post('http://10.136.23.30/validar_login.php', {
-        nome: nome.trim(),
-        cpf: cpf.trim(),
+      // Envia POST JSON para o backend
+      const response = await fetch('http://192.168.1.73/augebiteMobile-final/backend/validas_login.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nome: nome.trim(),
+          cpf: cpf.trim(),
+        }),
       });
 
-      if (response.data.success) {
-        Alert.alert('Bem-vindo', response.data.message);
+      const data = await response.json();
+
+      if (data.success) {
+        Alert.alert('Bem-vindo', data.message);
         // navigation.navigate('Home'); // redirecione se quiser
       } else {
-        Alert.alert('Erro', response.data.message);
+        Alert.alert('Erro', data.message);
       }
     } catch (error) {
       console.error('Erro de conexão:', error);
